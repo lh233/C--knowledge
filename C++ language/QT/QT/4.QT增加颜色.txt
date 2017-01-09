@@ -1,0 +1,1 @@
+在你要改变的属性栏stylesheet上增加background-color:(自己添加自己想要的颜色)

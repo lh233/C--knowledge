@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1477289295 source:e:\study\programming language\c++ language\c++ primer\section 5\5.25\main.cpp
+	<iostream>
+	<stdexcept>
+

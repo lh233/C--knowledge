@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1475979987 source:e:\study\programming language\c++ language\c++ primer\section 3\3.3 vector\test\test\main.cpp
+	<iostream>
+	<vector>
+

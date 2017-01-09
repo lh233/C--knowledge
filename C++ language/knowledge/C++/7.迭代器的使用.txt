@@ -1,0 +1,32 @@
+1、迭代器其实就是指针，读取集合或者数组中的一个值，读完以后又指向下一条数据；
+2、迭代器是很好用的一个东西，以Java为例，在遍历list或者map等对象的时候，效率比较高，而且能实现一些for循环不能实现的功能；
+
+string s("some string");
+if(s.begin() != s.end())
+	auto it = s.begin();
+	*it = toupper();
+	
+	
+迭代器类型：
+vector<int>::iterator it;		//it读写容器
+string::const_iterator it2;		//it2只能读写容器
+
+
+C++11新标准引入两个函数，分别是cbegin，cend，返回值都是const_iterator；
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    vector<int> v1(10, 1);
+    for(auto a=v1.begin(); a!=v1.end(); a++)			//auto也可以用vector<int>::iterator
+    {
+        cout << (*a) << endl;
+    }
+    return 0;
+}
+/*
+使用迭代器遍历
+*/

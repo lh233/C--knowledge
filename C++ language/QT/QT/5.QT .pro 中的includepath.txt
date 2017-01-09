@@ -1,0 +1,2 @@
+QT中的INCLUDEPATH这样就不需要加#include “路径名\\文件名”
+直接#include “文件名”		\\这样就行了

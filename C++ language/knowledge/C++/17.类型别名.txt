@@ -1,0 +1,2 @@
+typedef int arrT[10];		//arrT是一个类型别名，它表示的类型含有10个
+using arrT = int[10];		//arrT的等价声明

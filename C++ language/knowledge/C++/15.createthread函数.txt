@@ -1,0 +1,90 @@
+Createthread函数
+HANDLE WINAPI CreateThread
+( 
+  __in_opt   LPSECURITY_ATTRIBUTES lpThreadAttributes, // 指向SECURITY_ATTRIBUTES 的指针，为新线程指定安全描述 
+  __in       SIZE_T dwStackSize, // 初始化线程堆栈尺寸 
+  __in       LPTHREAD_START_ROUTINE lpStartAddress, //线程函数所指向的地址起始函数   
+  __in_opt   LPVOID lpParameter, // 给线程函数传递的参数   
+  __in       DWORD dwCreationFlags, // 有关线程的标志  
+  __out_opt  LPDWORD lpThreadId //系统分配给线程的ID
+ );  
+ 
+ ----第一个参数是安全属性，一般设为null，使用缺省的安全属性。当我们想此线程有另外的子进程时，可改变它的属性。 
+ ----第二个参数是线程堆栈尺寸，一般设为0，表示与此应用的堆栈尺寸相同，即主线程与创建的线程一样长度的堆栈。并且其长度会根据需要
+ 自动变长
+ ----第三个参数，也是最重要的一个，是一个指向函数名的指针，或者函数名字 
+ ----第四个参数是你需要向线程函数传递的参数，一般是一个指向结构的指针。不需传递参数时，则这个参数设为null。 
+ ----第五个参数，传入与线程有关的一些标志，如果是CREATE_SUSPENDED,则创建一个挂起的线程，即这个线程本身已创建，它的堆栈也已创建。
+ 但这个线程不会被分配给CPU时间，只有当ResumeThread函数被调用后才能执行；当然，也可以调用SuspendThread函数再次挂起线程。要是标志
+ 为0，那么一旦建立线程，线程函数就被立即调用。一般传为0即可。 
+ ----第六个参数是系统分配给这个线程的唯一的ID标志 
+ 
+ 
+ 
+ // MultiTread2.cpp : 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+
+#include <windows.h>
+#include <stdio.h>
+
+#define MAX_THREADS 10
+
+typedef struct MyData
+{
+    int val1;
+    int val2;
+    //char key[32];
+}MYDATA;
+
+DWORD WINAPI ThreadProc(LPVOID lpParam)
+{
+    MYDATA *pmd = (MYDATA *)lpParam;
+    printf("%d\n", pmd->val1);
+    printf("%d\n", pmd->val2);
+    return 0;
+}
+
+DWORD(WINAPI *pThreadProc)(LPVOID lpParam);
+
+void fun()
+{
+    pThreadProc = ThreadProc;
+    MYDATA mydt[MAX_THREADS];
+
+    HANDLE hThread[MAX_THREADS];
+    int i;
+    for (i = 0; i < MAX_THREADS; i++)
+    {
+        mydt[i].val1 = i;
+        mydt[i].val2 = i + 1;
+        hThread[i] = CreateThread(
+            NULL,// default security attributes
+            0,// use default stack size
+            pThreadProc,// thread function
+            &mydt[i],// argument to thread function
+            0, // use default creation flags
+            NULL);
+        if (hThread[i] == NULL)
+        {
+            ExitProcess(i);
+        }
+    }
+    // Wait until all threads have terminated.
+    WaitForMultipleObjects(MAX_THREADS, hThread, TRUE, INFINITE); //这样传给回调函数的参数不用定位static或者new出来的了
+    // Close all thread handles upon completion. 
+    for (i = 0; i < MAX_THREADS; i++)
+    {
+        CloseHandle(hThread[i]);
+    }
+
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+    fun();
+    getchar();
+    return 0;
+}
+ 

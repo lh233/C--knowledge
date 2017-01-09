@@ -1,0 +1,1 @@
+可以用QString::fromUtf8设置编码方式

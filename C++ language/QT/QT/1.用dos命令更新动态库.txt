@@ -1,0 +1,2 @@
+windeployqt DUT8188FTV.exe
+前提是先切换到生成的bin目录中

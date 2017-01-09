@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1475981873 source:e:\study\programming language\c++ language\c++ primer\section 3\3.3 vector\3.14\3.14\main.cpp
+	<iostream>
+	<stdio.h>
+	<vector>
+

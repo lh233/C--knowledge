@@ -1,0 +1,8 @@
+The QCoreApplication class provides an event loop for Qt applications without UI。
+
+
+ * For example, if you have installed Qt in the /usr/local/qt directory, and you run the regexp example,
+   this function will return "/usr/local/qt/examples/tools/regexp/regexp".***/
+QCoreApplication applicationDirPath();
+
+获取当前exe文件的路径

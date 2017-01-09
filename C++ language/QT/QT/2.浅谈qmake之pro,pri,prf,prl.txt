@@ -1,0 +1,77 @@
+http://blog.csdn.net/dbzhang800/article/details/6348432
+
+*.pro
+qmake 的工程(project)文件，这个大家肯定都非常熟悉了。那我就不费话了，上例子：
+
+这是一个典型的Qt示例程序的.pro文件(propriprfprl.pro)：
+
+	TEMPLATE = app
+	CONFIG += QT
+	QT += core gui
+
+	TARGET = propriprfprl
+
+	SOURCES += main.cpp/
+			widget.cpp
+	HEADERS  += widget.h
+	FORMS    += widget.ui
+
+前面3行是qmake的默认值，我们都可以省略
+TARGET 这行指定工程名，我们也可以省略
+
+
+
+*.pri
+i 是什么东西？包含(include)的首字母。类似于C、C++中的头文件吧，反正就是我们可以把
+*.pro 文件内的一部分单独放到一个 *.pri 文件内，然后包含进来。
+
+i 是什么东西？包含(include)的首字母。类似于C、C++中的头文件吧，反正就是我们可以吧 *.pro 文件内的一部分单独放到一个 *.pri 文件内，
+然后包含进来。
+
+接前面的例子，我们将源文件的设置独立出来，放到propriprfprl.pri文件内：
+
+SOURCES += main.cpp/
+        widget.cpp
+HEADERS  += widget.h
+FORMS    += widget.ui
+
+这时，我们的 propriprfprl.pro 文件就可以简化为：
+
+TEMPLATE = app
+CONFIG += QT
+QT += core gui
+
+TARGET = propriprfprl
+include(propriprfprl.pri)
+这有什么用呢？对我们这个例子来说，确实没什么用，反而多了一个文件，更麻烦了。
+可是，如果一个大点的项目，含有多个*.pro文件呢，这些pro需要有些共同的设置或需要的文件，这时就很有必要了。
+
+*.prf
+f又是神马东东？特性(feature)的首字符
+
+和pri文件类似，该文件也是要被包含进pro文件的
+只是：它更隐蔽
+你经常和它打交道，可能却一直视而不见
+
+我们这个例子中其实已经用到了，这就是
+CONFIG+=QT
+当我们在CONFIG中指定一个东西时，qmake就会尝试去加载相应的feature文件：
+
+Qt安装目录下的 mkspecs/features/qt.prf
+features 文件的文件名必须小写
+qmake 去哪些目录下搜索features文件呢？
+manual中有介绍，此处略
+暂时只知道前面提到的 $$QTDIR/mkspecs/features 就可以了
+写一个自己的features文件：propriprfprl.prf
+
+win32:CONFIG += console
+为win32的程序添加控制台，有点多次一举哈。
+将该文件放置到我们前面提到的目录中
+然后在pro文件内添加
+
+CONFIG += propriprfprl
+看到和 CONFIG += console 同样的效果了吧？
+
+注：我们也可以使用 load命令来加载prf文件，比如前面的命令可以认为等价于
+
+load(propriprfprl)

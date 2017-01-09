@@ -1,0 +1,20 @@
+所谓顶层const，就是经const修饰后变量保持不变的,如
+const int a = 40;              // a的值不再变化 
+int *const ptr1 = &a;       // ptr1始终指向a
+也可以
+int b = a;
+int *const ptr2 = &b;       // ptr2始终指向b，但此时b的值能够改变
+
+
+所谓底层const，一般是修饰指针对象，经修饰之后该指针必须指向对应的常量，即指向常量的指针，如
+const int a = 40;
+const int *p1 = &a; // 正确
+
+
+int b = 50;
+const int *p2 = &b; 					// 错误，因为b是非常量
+
+顶层const不影响传入函数的对象；
+例如：
+int calc(int ,int );
+int calc(const int, const int);			//这两句都是一样的

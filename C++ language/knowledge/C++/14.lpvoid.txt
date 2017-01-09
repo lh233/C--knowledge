@@ -1,0 +1,19 @@
+LPVOID是一个没有类型的指针（空指针类型），也就是说你可以将任意类型的指针赋值给LPVOID类型的变量（一般作为参数传递），
+然后在使用的时候在转换回来。 例如：
+class CMyClass
+{
+   void Start();
+   static UINT StartThread(LPVOID lParam);
+};
+
+void CMyClass::Start()
+{
+    AfxBeginThread(StartThread, this);
+}
+
+UINT CMyClass::StartThread(LPVOID lParam)
+{
+   CMyClass * pMyClass = (CMyClass*)lParam;
+   ...
+   return 0;
+}

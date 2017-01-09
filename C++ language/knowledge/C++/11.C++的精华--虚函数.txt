@@ -1,0 +1,51 @@
+http://blog.chinaunix.net/uid-26851094-id-3327323.html
+
+
+虚函数为了重载和多态的需要，在基类中是由定义的，即便定义是空，所以子类中可以重写也可以不写基类中的函数！
+
+纯虚函数在基类中是没有定义的，必须在子类中加以实现，很像java中的接口函数！
+
+引入原因：为了方便使用多态特性，我们常常需要在基类中定义虚函数。
+
+class Cman
+
+{
+
+public:
+	virtual void Eat()
+	{
+		……
+	};
+	void Move();
+private:
+
+};
+
+class CChild : public CMan
+{
+public:
+	virtual void Eat()
+	{
+		……
+	};
+
+private:
+
+};	
+
+
+//这才是使用的精髓，如果不定义基类的指针去使用，没有太大的意义
+
+CMan *p ;
+
+p = &m_man ;
+
+p->Eat(); //始终调用CMan的Eat成员函数，不会调用 CChild 的
+
+p = &m_child;
+
+p->Eat(); //如果子类实现(覆盖)了该方法，则始终调用CChild的Eat函数，不会调用CMan 的 Eat 方法；如果子类没有实现该函数，则调用CMan的Eat函数
+
+
+
+p->Move(); //子类中没有该成员函数，所以调用的是基类中的

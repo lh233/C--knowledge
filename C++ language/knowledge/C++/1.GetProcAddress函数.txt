@@ -1,0 +1,6 @@
+GetProcAddress函数检索指定的动态链接库(DLL)中的输出库函数地址。
+函数原型：
+FARPROC GetProcAddress(
+HMODULE hModule, // DLL模块句柄
+LPCSTR lpProcName // 函数名
+);

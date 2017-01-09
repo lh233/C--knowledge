@@ -1,0 +1,14 @@
+重载与作用域：
+string read();
+void print(const string &);
+void print(double);
+
+void fooBar(int val)
+{
+	bool read = false;		//新作用域，隐藏了外层的read
+	string s = read();		//错误：read、是一个布尔值，而非函数
+	void print(int);		//新作用域：隐藏了之前的print
+	print("value: "); 		//错误，print(const string &)被隐藏掉了
+	print(ival);			//正确
+	print(3.14);			//正确
+}
