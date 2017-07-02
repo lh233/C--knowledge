@@ -13,3 +13,6 @@
 13.qt中10进制转16进制
 14.QT调用命令行
 15.QT中的proc进程通信
+16.QT中的Edit buddy
+17.QT的GUI在子线程中无法使用的问题
+18.QT QString中解析html5的问题

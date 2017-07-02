@@ -12,3 +12,8 @@ void fooBar(int val)
 	print(ival);			//正确
 	print(3.14);			//正确
 }
+
+
+需要注意的是，返回值不同不构成重载函数，例：
+double print(double a);
+char print(int a);
