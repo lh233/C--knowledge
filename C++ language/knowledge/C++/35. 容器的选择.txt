@@ -1,0 +1,10 @@
+vector、map、multimap、unordered_map、unordered_multimap的底层数据结构，以及几种map容器如何选择？
+底层数据结构：
+
+vector基于数组，map、multimap基于红黑树，unordered_map、unordered_multimap基于哈希表。
+根据应用场景进行选择：
+
+map/unordered_map 不允许重复元素
+multimap/unordered_multimap 允许重复元素
+map/multimap 底层基于红黑树，元素自动有序，且插入、删除效率高
+unordered_map/unordered_multimap 底层基于哈希表，故元素无序，查找效率高。
