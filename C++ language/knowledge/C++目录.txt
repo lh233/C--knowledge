@@ -34,3 +34,6 @@
 33.C++中的dynamic_cast
 34. C与C++的区别
 35. 容器的选择
+36. 锁的使用.md
+37. condition_variable.md
+38. Lamda表达式.md
