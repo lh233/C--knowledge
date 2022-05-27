@@ -2,7 +2,12 @@ C++11中引入的auto主要有两种用途：
 自动类型推断和返回值占位；
 1、自动类型推断：
 	auto自动类型推断，从用于初始化表达式中推断出变量的数据类型；
-	
+
+
+
+注意auto是局部变量；
+
+
 注意的是：
 auto当使用数组的时候，变量的初始值时，推断得到的类型是指针而非数组
 #include <vector>
@@ -19,7 +24,7 @@ int main(int argc, char *argv[], char *env[])
 	auto a = 10;
 	auto c = 'A';
 	auto s("hello");
-
+	
 	// 2. 类型冗长
 	map<int, map<int,int> > map_;
 	map<int, map<int,int>>::const_iterator itr1 = map_.begin();
@@ -28,7 +33,7 @@ int main(int argc, char *argv[], char *env[])
 	{
 		std::cout << "hello world" << std::endl;
 	};
-
+	
 	return 0;
 };
 
@@ -49,27 +54,27 @@ decltype用法：
 	decltype(f()) sum = x;// sum的类型就是函数f的返回值类型。
 	
 	const int ci = 42, &cj = ci;
-
+	
 	decltype(ci) x = 0;   // x 类型为const int
 	auto z = ci;          // z 类型为int
-
+	
 	decltype(cj) y = x;   // y 类型为const int&
 	auto h = cj;          // h 类型为int
-	
+
 decltype 和 auto 区别
 
 decltype在处理顶层const和引用的方式与auto有些许不同，如果decltype使用的表达式是一个变量，则decltype返回该变量的类型
 (包括顶层const和引用在内)。
 
 	const int ci = 42, &cj = ci;
-
+	
 	decltype(ci) x = 0;   // x 类型为const int
 	auto z = ci;          // z 类型为int
-
+	
 	decltype(cj) y = x;   // y 类型为const int&
 	auto h = cj;          // h 类型为int	
 
 
-	
-	
-	
+?	
+?	
+?	
